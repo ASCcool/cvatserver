@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.7"
  
 networks:
   web:
@@ -6,6 +6,7 @@ networks:
   app:
     external: false
     name: app
+    driver: bridge
  
 services:
   caddy:
@@ -24,10 +25,12 @@ services:
     networks:
       - web
 
-  cvat:
-    image: openvino/cvat_ui
-    container_name: cvat_ui
+  ghost:
+    image: ghost:4-alpine
+    container_name: ghost
     restart: unless-stopped
+    environment:
+            - url=https://annotate.deepkapha.com
     networks:
       - web
       - app

@@ -2,5 +2,8 @@
    email ayush.srivastava@deepkapha.com
 }
 annotate.deepkapha.com {
-    reverse_proxy cvat:80
+    reverse_proxy ghost:8080
+}
+www.annotate.deepkapha.com {
+    redir https://annotate.deepkapha.com{uri}
 }
