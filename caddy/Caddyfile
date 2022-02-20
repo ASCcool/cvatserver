@@ -1,0 +1,6 @@
+{
+   email ayush.srivastava@deepkapha.com
+}
+annotate.deepkapha.com {
+    reverse_proxy cvat:80
+}

@@ -1,0 +1,33 @@
+version: "3.5"
+ 
+networks:
+  web:
+    external: true
+  app:
+    external: false
+    name: app
+ 
+services:
+  caddy:
+    image: caddy:2.4.6-alpine
+    container_name: caddy
+    restart: unless-stopped
+    hostname: caddy
+    user: root
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /root/backup/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /root/backup/caddy/data:/data
+      - /root/backup/caddy/config:/config
+    networks:
+      - web
+
+  cvat:
+    image: openvino/cvat_ui
+    container_name: cvat_ui
+    restart: unless-stopped
+    networks:
+      - web
+      - app
